@@ -29,6 +29,7 @@ function TopNav() {
     { label: 'Clinic Management',   active: true  },
     { label: 'Resource Management', active: false },
     { label: 'Billing Management',  active: false },
+    { label: 'Messages',            active: false },
   ]
   return (
     <header style={{
