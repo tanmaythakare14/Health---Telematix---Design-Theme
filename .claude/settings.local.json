@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(node -e \"const lucide = require\\('./node_modules/lucide-react'\\); console.log\\('HeartPulse:', !!lucide.HeartPulse, 'Weight:', !!lucide.Weight, 'Activity:', !!lucide.Activity, 'UserCheck:', !!lucide.UserCheck, 'ChevronRight:', !!lucide.ChevronRight, 'Clock:', !!lucide.Clock\\)\")",
+      "Bash(npx vite *)"
+    ]
+  }
+}
