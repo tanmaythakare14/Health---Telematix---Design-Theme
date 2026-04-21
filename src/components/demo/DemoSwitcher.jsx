@@ -15,9 +15,7 @@ export default function DemoSwitcher() {
 
   function handleSwitch(id) {
     setVariant(id)
-    // Navigate to the natural landing page for each variation
-    if (id === 4) navigate('/dashboard')
-    else          navigate('/clinic-management')
+    navigate('/')
   }
 
   return (
