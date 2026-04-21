@@ -311,12 +311,14 @@ export default function DashboardV2() {
     <div style={{ minHeight: '100vh', background: PAGE_BG, fontFamily: FF }}>
       <TopNav />
 
-      <div style={{ padding: '28px 28px 48px', display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <main style={{ width: '100%', padding: '36px 25px 48px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: 24 }}>
 
         {/* ── Page heading ──────────────────────────────────── */}
-        <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700, color: '#0F172A', margin: '0 0 4px', letterSpacing: '-0.02em', lineHeight: 1.2, fontFamily: FF }}>Dashboard</h1>
-          <p style={{ fontSize: 14, color: '#64748B', margin: 0, lineHeight: 1.5, fontFamily: FF }}>Overview of clinic performance, enrollment metrics and billing</p>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <div>
+            <h1 style={{ fontSize: 22, fontWeight: 700, color: '#0F172A', margin: '0 0 4px', letterSpacing: '-0.02em', lineHeight: 1.2, fontFamily: FF }}>Dashboard</h1>
+            <p style={{ fontSize: 14, color: '#64748B', margin: 0, lineHeight: 1.5, fontFamily: FF }}>Overview of clinic performance, enrollment metrics and billing</p>
+          </div>
         </div>
 
         {/* ── KPI Cards ─────────────────────────────────────── */}
@@ -511,7 +513,7 @@ export default function DashboardV2() {
           </div>
         </div>
 
-      </div>
+      </main>
     </div>
   )
 }
