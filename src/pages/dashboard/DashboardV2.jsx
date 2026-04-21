@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, Building2, Boxes, CreditCard, MessageSquare,
-  Bell, LogOut, ChevronDown, TrendingUp, TrendingDown,
+  Bell, LogOut, TrendingUp, TrendingDown,
   Users, UserPlus, UserMinus, Activity, DollarSign, Percent,
 } from 'lucide-react'
 import {
@@ -119,24 +119,28 @@ function TopNav() {
             <span style={{ position: 'absolute', top: 7, right: 8, width: 7, height: 7, borderRadius: '50%', background: '#EF4444', border: '1.5px solid white' }} />
           </button>
 
+          {/* Divider */}
+          <div style={{ width: 1, height: 22, background: '#E2E8F0', margin: '0 4px' }} />
+
           {/* Profile */}
           <div style={{ position: 'relative' }}>
-            <button onClick={() => setProfileOpen(o => !o)}
-              style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '6px 12px 6px 6px', borderRadius: 10, border: '1px solid #E2E8F0', background: '#ffffff', cursor: 'pointer' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#F8FAFF'}
-              onMouseLeave={e => e.currentTarget.style.background = '#ffffff'}
+            <div onClick={() => setProfileOpen(o => !o)}
+              style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 10px', borderRadius: 10, cursor: 'pointer', background: profileOpen ? BLUE_LT : 'transparent', transition: 'background 0.15s' }}
             >
-              <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, #60A5FA, ${BLUE})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10.5, fontWeight: 700, color: 'white' }}>SM</div>
-              <div>
-                <p style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', margin: 0, fontFamily: FF }}>Dr. Sarah Mitchell</p>
-                <p style={{ fontSize: 10.5, color: '#94A3B8', margin: 0, fontFamily: FF }}>admin@healthtelematix.com</p>
+              <div style={{ width: 34, height: 34, borderRadius: '50%', background: `linear-gradient(135deg, #60A5FA, ${BLUE})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'white', flexShrink: 0 }}>SM</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', lineHeight: 1, fontFamily: FF }}>Dr. Sarah Mitchell</span>
+                <span style={{ fontSize: 11, color: '#94A3B8', lineHeight: 1, fontFamily: FF }}>admin@healthtelematix.com</span>
               </div>
-              <ChevronDown size={12} style={{ color: '#94A3B8', transition: 'transform 0.15s', transform: profileOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
-            </button>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                style={{ marginLeft: 2, transition: 'transform 0.15s', transform: profileOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
             {profileOpen && (
               <>
                 <div style={{ position: 'fixed', inset: 0, zIndex: 90 }} onClick={() => setProfileOpen(false)} />
-                <div style={{ position: 'absolute', top: 'calc(100% + 6px)', right: 0, background: '#fff', borderRadius: 10, border: '1px solid #E2E8F0', boxShadow: '0 8px 24px rgba(0,0,0,0.10)', zIndex: 100, overflow: 'hidden', minWidth: 200, fontFamily: FF }}>
+                <div style={{ position: 'absolute', top: 'calc(100% + 8px)', right: 0, background: '#ffffff', borderRadius: 10, border: '1px solid #E2E8F0', boxShadow: '0 8px 24px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06)', minWidth: 200, zIndex: 100, overflow: 'hidden', fontFamily: FF }}>
                   <div style={{ padding: '12px 14px', borderBottom: '1px solid #F1F5F9' }}>
                     <p style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', margin: 0 }}>Dr. Sarah Mitchell</p>
                     <p style={{ fontSize: 11.5, color: '#94A3B8', margin: '2px 0 0' }}>admin@healthtelematix.com</p>
@@ -304,8 +308,8 @@ export default function DashboardV2() {
 
         {/* ── Page heading ──────────────────────────────────── */}
         <div>
-          <h1 style={{ fontSize: 20, fontWeight: 700, color: '#0F172A', margin: '0 0 4px', letterSpacing: '-0.02em', fontFamily: FF }}>Dashboard</h1>
-          <p style={{ fontSize: 13, color: '#94A3B8', margin: 0, fontFamily: FF }}>Overview of clinic performance, enrollment metrics and billing</p>
+          <h1 style={{ fontSize: 22, fontWeight: 700, color: '#0F172A', margin: '0 0 4px', letterSpacing: '-0.02em', lineHeight: 1.2, fontFamily: FF }}>Dashboard</h1>
+          <p style={{ fontSize: 14, color: '#64748B', margin: 0, lineHeight: 1.5, fontFamily: FF }}>Overview of clinic performance, enrollment metrics and billing</p>
         </div>
 
         {/* ── KPI Cards ─────────────────────────────────────── */}
