@@ -4,7 +4,7 @@ import {
   Search, Plus, MoreHorizontal, Pencil, Mail, Users,
   Link2, SlashSquare, RefreshCw, Upload, ChevronLeft, ChevronRight,
 } from 'lucide-react'
-import { Button }   from '@/components/ui/button'
+import { Button }   from '@/components/ui/Button'
 import { Input }    from '@/components/ui/input'
 import { Badge }    from '@/components/ui/badge'
 import {
@@ -39,11 +39,11 @@ function TopNav() {
   const [profileOpen, setProfileOpen] = useState(false)
 
   const NAV_LINKS = [
-    { label: 'Dashboard',            active: false },
-    { label: 'Clinic Management',    active: true  },
-    { label: 'Resource Management',  active: false },
-    { label: 'Billing Management',   active: false },
-    { label: 'Messages',             active: false },
+    { label: 'Dashboard',           active: false, path: '/dashboard'          },
+    { label: 'Clinic Management',   active: true,  path: '/clinic-management'  },
+    { label: 'Resource Management', active: false, path: null                  },
+    { label: 'Billing Management',  active: false, path: null                  },
+    { label: 'Messages',            active: false, path: '/messages'           },
   ]
 
   return (
@@ -93,7 +93,7 @@ function TopNav() {
                 whiteSpace: 'nowrap',
                 transition: 'background 0.15s, color 0.15s',
               }}
-              onClick={e => e.preventDefault()}
+              onClick={e => { e.preventDefault(); if (link.path) navigate(link.path) }}
             >
               {link.label}
             </a>

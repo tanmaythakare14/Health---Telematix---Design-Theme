@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Search, Plus, MoreHorizontal, Pencil, Mail, Users, Link2, SlashSquare, RefreshCw, X, Upload, ChevronLeft, ChevronRight } from 'lucide-react'
 import DashboardLayout from '../../components/layout/DashboardLayout'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import {

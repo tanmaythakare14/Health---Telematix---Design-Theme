@@ -155,7 +155,7 @@ function Field({ id, label, type = 'text', value, onChange, onBlur, error, place
 /* ─── Feature row in right panel ─────────────────────────────── */
 function Feature({ icon, text }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
       <div style={{
         width: 32, height: 32,
         borderRadius: '50%',
@@ -221,6 +221,7 @@ export default function SignInV4() {
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
+        flexDirection: 'row-reverse',
         fontFamily: 'Inter, system-ui, sans-serif',
       }}
     >
@@ -410,22 +411,22 @@ export default function SignInV4() {
           pointerEvents: 'none',
         }} />
 
-        {/* Content — single centered column, 40px gap between all sections */}
+        {/* Content — left-aligned column, 40px gap between all sections */}
         <div style={{
           position: 'relative', zIndex: 1,
           width: '100%', maxWidth: 400,
           display: 'flex', flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           gap: 40,
         }}>
 
           {/* Illustration */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
             <PanelIllustration />
           </div>
 
           {/* Headline + subheading */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 10 }}>
             <h2 style={{
               fontSize: 26,
               fontWeight: 800,
@@ -433,8 +434,7 @@ export default function SignInV4() {
               margin: 0,
               letterSpacing: '-0.02em',
               lineHeight: 1.2,
-              textAlign: 'center',
-              whiteSpace: 'nowrap',
+              textAlign: 'left',
             }}>
               Unified Care Management Platform
             </h2>
@@ -443,14 +443,14 @@ export default function SignInV4() {
               color: 'rgba(255,255,255,0.70)',
               margin: 0,
               lineHeight: 1.65,
-              textAlign: 'center',
+              textAlign: 'left',
             }}>
               Monitor RPM devices, manage APCM care programs, and coordinate your clinical team — all in one place.
             </p>
           </div>
 
           {/* Feature list */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-start', width: '100%' }}>
             <Feature
               icon={
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -483,7 +483,7 @@ export default function SignInV4() {
           </div>
 
           {/* Trust badges */}
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-start', flexWrap: 'wrap' }}>
             {['HIPAA Compliant', 'FHIR R4', 'SOC 2 Type II'].map(label => (
               <div key={label} style={{
                 background: 'rgba(255,255,255,0.12)',

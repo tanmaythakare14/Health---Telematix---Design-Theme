@@ -6,7 +6,7 @@ import {
   Wifi, UserCircle2, Pencil, SlashSquare, RefreshCw,
   UserPlus, Trash2, Activity, HeartPulse, Stethoscope,
 } from 'lucide-react'
-import { Button }   from '@/components/ui/button'
+import { Button }   from '@/components/ui/Button'
 import { Badge }    from '@/components/ui/badge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
@@ -25,11 +25,11 @@ function TopNav() {
   const [profileOpen, setProfileOpen] = useState(false)
 
   const NAV_LINKS = [
-    { label: 'Dashboard',           active: false },
-    { label: 'Clinic Management',   active: true  },
-    { label: 'Resource Management', active: false },
-    { label: 'Billing Management',  active: false },
-    { label: 'Messages',            active: false },
+    { label: 'Dashboard',           active: false, path: '/dashboard'         },
+    { label: 'Clinic Management',   active: true,  path: '/clinic-management' },
+    { label: 'Resource Management', active: false, path: null                 },
+    { label: 'Billing Management',  active: false, path: null                 },
+    { label: 'Messages',            active: false, path: '/messages'          },
   ]
   return (
     <header style={{
@@ -67,7 +67,7 @@ function TopNav() {
                 fontFamily: 'Inter, system-ui, sans-serif',
                 whiteSpace: 'nowrap',
               }}
-              onClick={e => e.preventDefault()}
+              onClick={e => { e.preventDefault(); if (link.path) navigate(link.path) }}
             >
               {link.label}
             </a>

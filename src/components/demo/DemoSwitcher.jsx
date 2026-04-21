@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useVariant } from '../../context/VariantContext'
 
 const THEMES = [
@@ -10,6 +11,14 @@ const THEMES = [
    regardless of which variant's CSS is currently active.   */
 export default function DemoSwitcher() {
   const { variant, setVariant } = useVariant()
+  const navigate = useNavigate()
+
+  function handleSwitch(id) {
+    setVariant(id)
+    // Navigate to the natural landing page for each variation
+    if (id === 4) navigate('/dashboard')
+    else          navigate('/clinic-management')
+  }
 
   return (
     <div
@@ -51,7 +60,7 @@ export default function DemoSwitcher() {
         return (
           <button
             key={t.id}
-            onClick={() => setVariant(t.id)}
+            onClick={() => handleSwitch(t.id)}
             title={`Switch to ${t.label}`}
             style={{
               height: 30,

@@ -1,52 +1,63 @@
 import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
-  ArrowLeft, ChevronRight, TrendingUp, TrendingDown,
+  ArrowLeft, ChevronLeft, ChevronRight, TrendingUp, TrendingDown,
   Users, Mail, Phone, Building2, Hash, CreditCard,
   Wifi, UserCircle2, Pencil, SlashSquare, RefreshCw,
   Activity, HeartPulse, Search,
   LayoutDashboard, Boxes, MessageSquare, Settings,
   Bell, LogOut, ChevronDown,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/Button'
 import { Badge }  from '@/components/ui/badge'
 import { ALL_CLINICS } from '../../data/clinics'
 
 /* ─── Design tokens ──────────────────────────────────────────── */
-const TEAL    = '#0D9488'
-const TEAL_LT = '#F0FDFA'
-const PAGE_BG = '#FAFAF9'
-const NAV_W   = 240
-const FF      = 'Inter, system-ui, sans-serif'
+const TEAL       = '#0D9488'
+const TEAL_LT    = '#F0FDFA'
+const PAGE_BG    = '#FAFAF9'
+const NAV_W      = 240
+const COLLAPSED_W = 60
+const FF         = 'Inter, system-ui, sans-serif'
 
 /* ─── Left Nav Item ──────────────────────────────────────────── */
-function NavItem({ icon, label, active, onClick, badge }) {
+function NavItem({ icon, label, active, onClick, badge, collapsed, showTooltip }) {
   return (
-    <button onClick={onClick} style={{
-      width: '100%', display: 'flex', alignItems: 'center', gap: 11,
-      padding: '9px 12px', borderRadius: 9,
-      background: active ? TEAL : 'transparent',
-      border: 'none', cursor: 'pointer',
-      color: active ? '#ffffff' : '#64748B',
-      fontSize: 13.5, fontWeight: active ? 600 : 400,
-      fontFamily: FF, transition: 'background 0.15s, color 0.15s', textAlign: 'left',
-    }}
-      onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#F1F5F9' }}
-      onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent' }}
-    >
-      <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0, opacity: active ? 1 : 0.65 }}>{icon}</span>
-      <span style={{ flex: 1 }}>{label}</span>
-      {badge !== undefined && (
-        <span style={{ fontSize: 10.5, fontWeight: 700, padding: '2px 6px', borderRadius: 999, background: active ? 'rgba(255,255,255,0.25)' : TEAL, color: '#fff', lineHeight: 1.4 }}>
-          {badge}
-        </span>
+    <div style={{ position: 'relative' }}>
+      <button onClick={onClick} style={{
+        width: '100%', display: 'flex', alignItems: 'center',
+        gap: collapsed ? 0 : 11,
+        padding: collapsed ? '10px 0' : '9px 12px',
+        justifyContent: collapsed ? 'center' : 'flex-start',
+        borderRadius: 9,
+        background: active ? TEAL : 'transparent',
+        border: 'none', cursor: 'pointer',
+        color: active ? '#ffffff' : '#64748B',
+        fontSize: 13.5, fontWeight: active ? 600 : 400,
+        fontFamily: FF, transition: 'background 0.15s, color 0.15s', textAlign: 'left',
+      }}
+        onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#F1F5F9' }}
+        onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent' }}
+      >
+        <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0, opacity: active ? 1 : 0.65 }}>{icon}</span>
+        {!collapsed && <span style={{ flex: 1 }}>{label}</span>}
+        {!collapsed && badge !== undefined && (
+          <span style={{ fontSize: 10.5, fontWeight: 700, padding: '2px 6px', borderRadius: 999, background: active ? 'rgba(255,255,255,0.25)' : TEAL, color: '#fff', lineHeight: 1.4 }}>{badge}</span>
+        )}
+      </button>
+      {collapsed && showTooltip && (
+        <div style={{ position: 'absolute', left: 'calc(100% + 10px)', top: '50%', transform: 'translateY(-50%)', background: '#1E293B', color: '#fff', fontSize: 12.5, fontWeight: 500, padding: '6px 12px', borderRadius: 7, whiteSpace: 'nowrap', pointerEvents: 'none', zIndex: 200, boxShadow: '0 4px 14px rgba(0,0,0,0.22)', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ position: 'absolute', right: '100%', top: '50%', transform: 'translateY(-50%)', width: 0, height: 0, borderTop: '5px solid transparent', borderBottom: '5px solid transparent', borderRight: '5px solid #1E293B' }} />
+          {label}
+          {badge !== undefined && <span style={{ fontSize: 10, fontWeight: 700, background: TEAL, padding: '1px 5px', borderRadius: 999, color: '#fff' }}>{badge}</span>}
+        </div>
       )}
-    </button>
+    </div>
   )
 }
 
 /* ─── Left Navigation ────────────────────────────────────────── */
-function LeftNav({ active: activeItem }) {
+function LeftNav({ active: activeItem, collapsed, onToggle }) {
   const navigate = useNavigate()
   const [profileOpen, setProfileOpen] = useState(false)
 
@@ -57,49 +68,68 @@ function LeftNav({ active: activeItem }) {
     { id: 'messages',            label: 'Messages',            icon: <MessageSquare size={17} />, badge: 3 },
   ]
 
+  const navW = collapsed ? COLLAPSED_W : NAV_W
+
   return (
-    <div style={{ width: NAV_W, minHeight: '100vh', background: '#ffffff', borderRight: '1px solid #E8EDF2', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, zIndex: 40, boxShadow: '2px 0 12px rgba(0,0,0,0.04)' }}>
-      <div style={{ padding: '22px 18px 18px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+    <div style={{ width: navW, minHeight: '100vh', background: '#ffffff', borderRight: '1px solid #E8EDF2', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, zIndex: 40, boxShadow: '2px 0 12px rgba(0,0,0,0.04)', transition: 'width 0.22s ease', overflow: 'hidden' }}>
+
+      {/* Logo + toggle */}
+      <div style={{ padding: collapsed ? '20px 0' : '22px 18px 18px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', flexShrink: 0, position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0, background: TEAL, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 4px 10px ${TEAL}44` }}>
             <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
               <path d="M3 13h4l2-5.5 2.5 11 2-7.5 1.5 3.5H23" stroke="white" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <div>
-            <p style={{ fontSize: 14, fontWeight: 800, color: '#0F172A', margin: 0, lineHeight: 1.15, fontFamily: FF, letterSpacing: '-0.02em' }}>Health Telematix</p>
-            <p style={{ fontSize: 10.5, fontWeight: 500, color: '#94A3B8', margin: 0, fontFamily: FF }}>Care Management Platform</p>
-          </div>
+          {!collapsed && (
+            <div>
+              <p style={{ fontSize: 14, fontWeight: 800, color: '#0F172A', margin: 0, lineHeight: 1.15, fontFamily: FF, letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>Health Telematix</p>
+              <p style={{ fontSize: 10.5, fontWeight: 500, color: '#94A3B8', margin: 0, fontFamily: FF, whiteSpace: 'nowrap' }}>Care Management Platform</p>
+            </div>
+          )}
         </div>
+        <button onClick={onToggle} style={{ position: 'fixed', left: navW - 12, top: 40, width: 24, height: 24, borderRadius: '50%', background: '#ffffff', border: '1.5px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.10)', zIndex: 50, color: '#94A3B8', transition: 'left 0.22s ease' }}
+          onMouseEnter={e => { e.currentTarget.style.background = TEAL; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = TEAL }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.borderColor = '#E8EDF2' }}
+        >
+          {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
+        </button>
       </div>
-      <div style={{ height: 1, background: '#F1F5F9', margin: '0 18px' }} />
-      <div style={{ padding: '14px 12px', flex: 1 }}>
-        <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}>Main Menu</p>
+
+      <div style={{ height: 1, background: '#F1F5F9', margin: collapsed ? '0 10px' : '0 18px', flexShrink: 0 }} />
+
+      <div style={{ padding: collapsed ? '14px 8px' : '14px 12px', flex: 1 }}>
+        {!collapsed && <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}>Main Menu</p>}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {mainNav.map(item => (
-            <NavItem key={item.id} icon={item.icon} label={item.label} active={activeItem === item.id} badge={item.badge}
-              onClick={() => { if (item.id === 'clinic-management') navigate('/clinic-management'); if (item.id === 'messages') navigate('/messages') }} />
+            <NavItem key={item.id} icon={item.icon} label={item.label} active={activeItem === item.id} badge={item.badge} collapsed={collapsed}
+              onClick={() => { if (item.id === 'dashboard') navigate('/dashboard'); if (item.id === 'clinic-management') navigate('/clinic-management'); if (item.id === 'messages') navigate('/messages') }} />
           ))}
         </div>
       </div>
-      <div style={{ padding: '10px 12px 18px', borderTop: '1px solid #F1F5F9', display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <NavItem icon={<Settings size={17} />} label="Settings" active={activeItem === 'settings'} />
+
+      <div style={{ padding: collapsed ? '10px 8px 18px' : '10px 12px 18px', borderTop: '1px solid #F1F5F9', display: 'flex', flexDirection: 'column', gap: 2, flexShrink: 0 }}>
+        <NavItem icon={<Settings size={17} />} label="Settings" active={activeItem === 'settings'} collapsed={collapsed} />
         <div style={{ position: 'relative', marginTop: 6 }}>
-          <button onClick={() => setProfileOpen(o => !o)} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px', borderRadius: 9, background: profileOpen ? '#F1F5F9' : 'transparent', border: 'none', cursor: 'pointer', fontFamily: FF, transition: 'background 0.15s' }}
+          <button onClick={() => setProfileOpen(o => !o)} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 10, padding: collapsed ? '9px 0' : '9px 12px', justifyContent: collapsed ? 'center' : 'flex-start', borderRadius: 9, background: profileOpen ? '#F1F5F9' : 'transparent', border: 'none', cursor: 'pointer', fontFamily: FF, transition: 'background 0.15s' }}
             onMouseEnter={e => e.currentTarget.style.background = '#F1F5F9'}
             onMouseLeave={e => { if (!profileOpen) e.currentTarget.style.background = 'transparent' }}
           >
             <div style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, background: `linear-gradient(135deg, #14B8A6, ${TEAL})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'white' }}>SM</div>
-            <div style={{ flex: 1, textAlign: 'left', minWidth: 0 }}>
-              <p style={{ fontSize: 12.5, fontWeight: 600, color: '#0F172A', margin: 0, lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Dr. Sarah Mitchell</p>
-              <p style={{ fontSize: 11, color: '#94A3B8', margin: 0, lineHeight: 1.3 }}>Admin</p>
-            </div>
-            <ChevronDown size={13} style={{ color: '#94A3B8', flexShrink: 0, transition: 'transform 0.15s', transform: profileOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
+            {!collapsed && (
+              <>
+                <div style={{ flex: 1, textAlign: 'left', minWidth: 0 }}>
+                  <p style={{ fontSize: 12.5, fontWeight: 600, color: '#0F172A', margin: 0, lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Dr. Sarah Mitchell</p>
+                  <p style={{ fontSize: 11, color: '#94A3B8', margin: 0, lineHeight: 1.3 }}>Admin</p>
+                </div>
+                <ChevronDown size={13} style={{ color: '#94A3B8', flexShrink: 0, transition: 'transform 0.15s', transform: profileOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
+              </>
+            )}
           </button>
           {profileOpen && (
             <>
               <div style={{ position: 'fixed', inset: 0, zIndex: 90 }} onClick={() => setProfileOpen(false)} />
-              <div style={{ position: 'absolute', bottom: 'calc(100% + 6px)', left: 0, right: 0, background: '#ffffff', borderRadius: 10, border: '1px solid #E2E8F0', boxShadow: '0 8px 24px rgba(0,0,0,0.10)', zIndex: 100, overflow: 'hidden', fontFamily: FF }}>
+              <div style={{ position: 'absolute', bottom: 'calc(100% + 6px)', left: 0, right: collapsed ? 'auto' : 0, width: collapsed ? 200 : 'auto', background: '#ffffff', borderRadius: 10, border: '1px solid #E2E8F0', boxShadow: '0 8px 24px rgba(0,0,0,0.10)', zIndex: 100, overflow: 'hidden', fontFamily: FF }}>
                 <div style={{ padding: '12px 14px', borderBottom: '1px solid #F1F5F9' }}>
                   <p style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', margin: 0 }}>Dr. Sarah Mitchell</p>
                   <p style={{ fontSize: 11.5, color: '#94A3B8', margin: '2px 0 0' }}>admin@healthtelematix.com</p>
@@ -335,13 +365,14 @@ function StatusBadge({ status }) {
 export default function ClinicDetailV4() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [navCollapsed, setNavCollapsed] = useState(false)
   const clinic = ALL_CLINICS.find(c => c.id === Number(id))
 
   if (!clinic) {
     return (
       <div style={{ minHeight: '100vh', background: PAGE_BG, fontFamily: FF, display: 'flex' }}>
-        <LeftNav active="clinic-management" />
-        <div style={{ marginLeft: NAV_W, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12 }}>
+        <LeftNav active="clinic-management" collapsed={navCollapsed} onToggle={() => setNavCollapsed(o => !o)} />
+        <div style={{ marginLeft: navCollapsed ? COLLAPSED_W : NAV_W, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12, transition: 'margin-left 0.22s ease' }}>
           <Building2 size={40} strokeWidth={1.25} style={{ opacity: 0.3, color: '#94A3B8' }} />
           <p style={{ fontSize: 15, fontWeight: 500, color: '#64748B', margin: 0 }}>Clinic not found</p>
           <Button onClick={() => navigate('/clinic-management')} className="rounded-[8px] h-9 px-5 text-[13px]" style={{ background: TEAL }}>
@@ -354,9 +385,9 @@ export default function ClinicDetailV4() {
 
   return (
     <div style={{ minHeight: '100vh', background: PAGE_BG, fontFamily: FF, display: 'flex' }}>
-      <LeftNav active="clinic-management" />
+      <LeftNav active="clinic-management" collapsed={navCollapsed} onToggle={() => setNavCollapsed(o => !o)} />
 
-      <div style={{ marginLeft: NAV_W, flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+      <div style={{ marginLeft: navCollapsed ? COLLAPSED_W : NAV_W, flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, transition: 'margin-left 0.22s ease' }}>
         <TopBar clinic={clinic} />
 
         <main style={{ padding: '28px', display: 'flex', flexDirection: 'column', gap: 22 }}>

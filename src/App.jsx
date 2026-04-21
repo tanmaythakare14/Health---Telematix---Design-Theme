@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { VariantProvider, useVariant } from './context/VariantContext'
 import DemoSwitcher from './components/demo/DemoSwitcher'
 
@@ -16,7 +16,12 @@ import ClinicManagementV4 from './pages/dashboard/ClinicManagementV4'
 import ClinicDetail       from './pages/dashboard/ClinicDetail'
 import ClinicDetailV2     from './pages/dashboard/ClinicDetailV2'
 import ClinicDetailV4     from './pages/dashboard/ClinicDetailV4'
+import MessagesV1        from './pages/dashboard/MessagesV1'
+import MessagesV2        from './pages/dashboard/MessagesV2'
 import MessagesV4        from './pages/dashboard/MessagesV4'
+import DashboardV4       from './pages/dashboard/DashboardV4'
+import DashboardV2       from './pages/dashboard/DashboardV2'
+import DashboardV1       from './pages/dashboard/DashboardV1'
 
 /* ── Variant router wrappers (thin — just pick the right component) ── */
 
@@ -33,6 +38,21 @@ function ClinicManagementRoute() {
   if (variant === 2) return <ClinicManagementV2 />
   if (variant === 4) return <ClinicManagementV4 />
   return <ClinicManagement />
+}
+
+function MessagesRoute() {
+  const { variant } = useVariant()
+  if (variant === 4) return <MessagesV4 />
+  if (variant === 2) return <MessagesV2 />
+  return <MessagesV1 />
+}
+
+function DashboardRoute() {
+  const { variant } = useVariant()
+  if (variant === 4) return <DashboardV4 />
+  if (variant === 2) return <DashboardV2 />
+  if (variant === 1) return <DashboardV1 />
+  return <Navigate to="/clinic-management" replace />
 }
 
 function ClinicDetailRoute() {
@@ -53,7 +73,8 @@ export default function App() {
           <Route path="/forgot-password"        element={<ForgotPassword />} />
           <Route path="/clinic-management"      element={<ClinicManagementRoute />} />
           <Route path="/clinic-management/:id"  element={<ClinicDetailRoute />} />
-          <Route path="/messages"              element={<MessagesV4 />} />
+          <Route path="/messages"              element={<MessagesRoute />} />
+          <Route path="/dashboard"             element={<DashboardRoute />} />
         </Routes>
         <DemoSwitcher />
       </BrowserRouter>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import AuthLayout from '../../components/auth/AuthLayout'
-import { Button } from '../../components/ui/button'
+import { Button } from '../../components/ui/Button'
 import InputField from '../../components/ui/InputField'
 import { validateEmail } from '../../utils/authValidation'
 
