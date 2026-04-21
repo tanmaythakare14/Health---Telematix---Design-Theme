@@ -195,7 +195,7 @@ function TopNav() {
   const [profileOpen, setProfileOpen] = useState(false)
 
   const NAV_LINKS = [
-    { label: 'Dashboard',           active: false, path: null },
+    { label: 'Dashboard',           active: false, path: '/dashboard' },
     { label: 'Clinic Management',   active: false, path: '/clinic-management' },
     { label: 'Resource Management', active: false, path: null },
     { label: 'Billing Management',  active: false, path: null },
