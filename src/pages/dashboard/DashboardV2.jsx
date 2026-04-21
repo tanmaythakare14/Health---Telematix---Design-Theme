@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, Building2, Boxes, CreditCard, MessageSquare,
-  Bell, LogOut, ChevronDown, TrendingUp, TrendingDown,
+  ChevronDown, TrendingUp, TrendingDown,
   Users, UserPlus, UserMinus, Activity, DollarSign, Percent,
 } from 'lucide-react'
 import {
@@ -88,11 +88,10 @@ function TopNav() {
 
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexShrink: 0 }}>
-          <div style={{ width: 30, height: 30, borderRadius: 8, background: BLUE_LT, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <svg width="16" height="16" viewBox="0 0 26 26" fill="none">
-              <path d="M3 13h4l2-5.5 2.5 11 2-7.5 1.5 3.5H23" stroke={BLUE} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+          <svg width="30" height="30" viewBox="0 0 26 26" fill="none">
+            <rect width="26" height="26" rx="7" fill={BLUE_LT}/>
+            <path d="M3 13h4l2-5.5 2.5 11 2-7.5 1.5 3.5H23" stroke={BLUE} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
           <span style={{ fontSize: 15, fontWeight: 700, color: BLUE, letterSpacing: '-0.02em', fontFamily: FF }}>Health Telematix</span>
         </div>
 
@@ -104,8 +103,6 @@ function TopNav() {
           {NAV_LINKS.map(link => (
             <a key={link.label} href="#"
               style={{ padding: '7px 13px', borderRadius: 7, fontSize: 13.5, fontWeight: link.active ? 600 : 500, color: link.active ? BLUE : '#64748B', background: link.active ? BLUE_LT : 'transparent', textDecoration: 'none', fontFamily: FF, whiteSpace: 'nowrap', transition: 'background 0.15s, color 0.15s' }}
-              onMouseEnter={e => { if (!link.active) { e.currentTarget.style.background = '#F1F5F9'; e.currentTarget.style.color = '#374151' } }}
-              onMouseLeave={e => { if (!link.active) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#64748B' } }}
               onClick={e => { e.preventDefault(); if (link.path) navigate(link.path) }}
             >{link.label}</a>
           ))}
@@ -113,13 +110,17 @@ function TopNav() {
 
         {/* Right side */}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+
           {/* Bell */}
-          <button style={{ position: 'relative', width: 36, height: 36, borderRadius: 8, border: '1px solid #E2E8F0', background: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748B' }}>
-            <Bell size={16} />
+          <button style={{ position: 'relative', width: 36, height: 36, borderRadius: 8, border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748B' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
             <span style={{ position: 'absolute', top: 7, right: 8, width: 7, height: 7, borderRadius: '50%', background: '#EF4444', border: '1.5px solid white' }} />
           </button>
 
-          {/* Divider */}
+          {/* Profile divider */}
           <div style={{ width: 1, height: 22, background: '#E2E8F0', margin: '0 4px' }} />
 
           {/* Profile */}
@@ -127,7 +128,7 @@ function TopNav() {
             <div onClick={() => setProfileOpen(o => !o)}
               style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 10px', borderRadius: 10, cursor: 'pointer', background: profileOpen ? BLUE_LT : 'transparent', transition: 'background 0.15s' }}
             >
-              <div style={{ width: 34, height: 34, borderRadius: '50%', background: `linear-gradient(135deg, #60A5FA, ${BLUE})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'white', flexShrink: 0 }}>SM</div>
+              <div style={{ width: 34, height: 34, borderRadius: '50%', background: `linear-gradient(135deg, #3B82F6, ${BLUE})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'white', flexShrink: 0 }}>SM</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 <span style={{ fontSize: 13, fontWeight: 600, color: '#0F172A', lineHeight: 1, fontFamily: FF }}>Dr. Sarah Mitchell</span>
                 <span style={{ fontSize: 11, color: '#94A3B8', lineHeight: 1, fontFamily: FF }}>admin@healthtelematix.com</span>
@@ -146,16 +147,22 @@ function TopNav() {
                     <p style={{ fontSize: 11.5, color: '#94A3B8', margin: '2px 0 0' }}>admin@healthtelematix.com</p>
                   </div>
                   <button onClick={() => { setProfileOpen(false); navigate('/') }}
-                    style={{ width: '100%', padding: '10px 14px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 9, fontSize: 13, fontWeight: 500, color: '#EF4444', textAlign: 'left', fontFamily: FF }}
+                    style={{ width: '100%', padding: '10px 14px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 9, fontSize: 13, fontWeight: 500, color: '#EF4444', textAlign: 'left', transition: 'background 0.12s', fontFamily: FF }}
                     onMouseEnter={e => e.currentTarget.style.background = '#FEF2F2'}
                     onMouseLeave={e => e.currentTarget.style.background = 'none'}
                   >
-                    <LogOut size={14} /> Log Out
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                      <polyline points="16 17 21 12 16 7"/>
+                      <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Log Out
                   </button>
                 </div>
               </>
             )}
           </div>
+
         </div>
       </div>
     </header>
