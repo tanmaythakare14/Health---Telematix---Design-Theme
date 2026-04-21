@@ -5,7 +5,6 @@ import DemoSwitcher from './components/demo/DemoSwitcher'
 /* Auth pages */
 import SignIn         from './pages/auth/SignIn'
 import SignInV2       from './pages/auth/SignInV2'
-import SignInV3       from './pages/auth/SignInV3'
 import SignInV4       from './pages/auth/SignInV4'
 import ForgotPassword from './pages/auth/ForgotPassword'
 
@@ -28,7 +27,6 @@ import DashboardV1       from './pages/dashboard/DashboardV1'
 function SignInRoute() {
   const { variant } = useVariant()
   if (variant === 2) return <SignInV2 />
-  if (variant === 3) return <SignInV3 />
   if (variant === 4) return <SignInV4 />
   return <SignIn />
 }
