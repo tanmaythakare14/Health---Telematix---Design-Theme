@@ -154,9 +154,11 @@ export default function SignIn() {
         {/* Legal */}
         <p className="auth-legal">
           By signing in, you agree to our{' '}
-          <a href="#">Privacy Policy</a>
-          {' '}&amp;{' '}
-          <a href="#">Terms of Service</a>
+          <span style={{ whiteSpace: 'nowrap' }}>
+            <a href="#">Privacy Policy</a>
+            {' '}&amp;{' '}
+            <a href="#">Terms of Service</a>
+          </span>
         </p>
       </div>
 

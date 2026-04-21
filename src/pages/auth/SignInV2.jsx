@@ -547,9 +547,11 @@ export default function SignInV2() {
             {/* Legal */}
             <p style={{ marginTop: 20, fontSize: 12, color: '#94A3B8', textAlign: 'center', lineHeight: 1.6 }}>
               By signing in, you agree to our{' '}
-              <a href="#" style={{ color: '#2563EB', textDecoration: 'none', fontWeight: 500 }}>Privacy Policy</a>
-              {' '}&amp;{' '}
-              <a href="#" style={{ color: '#2563EB', textDecoration: 'none', fontWeight: 500 }}>Terms of Service</a>
+              <span style={{ whiteSpace: 'nowrap' }}>
+                <a href="#" style={{ color: '#2563EB', textDecoration: 'none', fontWeight: 500 }}>Privacy Policy</a>
+                {' '}&amp;{' '}
+                <a href="#" style={{ color: '#2563EB', textDecoration: 'none', fontWeight: 500 }}>Terms of Service</a>
+              </span>
             </p>
           </div>
 

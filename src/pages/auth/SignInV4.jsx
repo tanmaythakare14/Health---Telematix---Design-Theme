@@ -34,7 +34,7 @@ function EyeIcon({ open }) {
 /* ─── Right Panel Illustration (teal panel art) ────────────────── */
 function PanelIllustration() {
   return (
-    <svg width="340" height="320" viewBox="0 0 340 320" fill="none">
+    <svg width="260" height="244" viewBox="0 0 340 320" fill="none">
       {/* Central monitor / device */}
       <rect x="100" y="80" width="140" height="100" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" strokeWidth="2"/>
       {/* Screen content */}
@@ -411,13 +411,13 @@ export default function SignInV4() {
           pointerEvents: 'none',
         }} />
 
-        {/* Content — left-aligned column, 40px gap between all sections */}
+        {/* Content — left-aligned column, 24px gap between all sections */}
         <div style={{
           position: 'relative', zIndex: 1,
           width: '100%', maxWidth: 400,
           display: 'flex', flexDirection: 'column',
           alignItems: 'flex-start',
-          gap: 40,
+          gap: 24,
         }}>
 
           {/* Illustration */}

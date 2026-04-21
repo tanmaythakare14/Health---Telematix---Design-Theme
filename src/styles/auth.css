@@ -44,7 +44,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 48px;
+  padding: 120px 48px 48px;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -83,7 +83,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 32px;
 }
 
 .auth-left__logo {
