@@ -153,23 +153,7 @@ export default function ClinicManagement() {
   return (
     <DashboardLayout pageTitle="Clinic Management" pageSubtitle="Manage and monitor your clinic network and care teams">
 
-      {/* ── Section 1: Page Header ── */}
-      <div className="flex items-start justify-between mb-7">
-        <div>
-          <h1 className="text-[22px] font-bold text-slate-900 tracking-tight leading-tight">Clinic Management</h1>
-          <p className="text-sm text-slate-500 mt-1">Manage registered clinics, care teams, and EHR integrations.</p>
-        </div>
-        <Button
-          onClick={() => setShowModal(true)}
-          className="rounded-[5px] h-10 px-5 text-[13.5px] font-semibold gap-2 shadow-sm shadow-[#1F3A5F]/20 hover:shadow-md hover:shadow-[#1F3A5F]/25 transition-shadow"
-          style={{ background: '#1F3A5F' }}
-        >
-          <Plus size={15} strokeWidth={2.5} />
-          Add New Clinic
-        </Button>
-      </div>
-
-      {/* ── Section 2: Tabs + Search ── */}
+      {/* ── Tabs + Search + CTA — single inline row ── */}
       <div className="flex items-end justify-between mb-5 border-b border-slate-200">
         <Tabs value={tab} onValueChange={handleTabChange}>
           <TabsList className="bg-transparent p-0 rounded-none h-auto gap-0">
@@ -178,7 +162,7 @@ export default function ClinicManagement() {
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#1F3A5F] data-[state=active]:text-[#1F3A5F] data-[state=active]:font-semibold text-slate-500 px-5 pb-3 pt-1 text-[13.5px] bg-transparent shadow-none data-[state=active]:shadow-none data-[state=active]:bg-transparent -mb-px"
             >
               Active Clinics
-              <span className="ml-2 bg-slate-100 text-slate-500 data-[state=active]:bg-[#1F3A5F] data-[state=active]:text-white text-[11px] font-bold px-2 py-0.5 rounded-full"
+              <span className="ml-2 bg-slate-100 text-slate-500 text-[11px] font-bold px-2 py-0.5 rounded-full"
                 style={{ background: tab === 'active' ? '#1F3A5F' : undefined, color: tab === 'active' ? 'white' : undefined }}>
                 {activeCount}
               </span>
@@ -196,15 +180,25 @@ export default function ClinicManagement() {
           </TabsList>
         </Tabs>
 
-        {/* Search */}
-        <div className="relative w-80 mb-2.5">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-          <Input
-            placeholder="Search by Clinic Name"
-            value={search}
-            onChange={handleSearch}
-            className="pl-8 h-9 text-[13.5px] rounded-[5px] border-slate-200 focus-visible:ring-[#1F3A5F]/15 focus-visible:border-[#1F3A5F] bg-white"
-          />
+        {/* Search + CTA */}
+        <div className="flex items-center gap-3 mb-2.5">
+          <div className="relative w-72">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+            <Input
+              placeholder="Search by Clinic Name"
+              value={search}
+              onChange={handleSearch}
+              className="pl-8 h-9 text-[13.5px] rounded-[5px] border-slate-200 focus-visible:ring-[#1F3A5F]/15 focus-visible:border-[#1F3A5F] bg-white"
+            />
+          </div>
+          <Button
+            onClick={() => setShowModal(true)}
+            className="rounded-[5px] h-9 px-5 text-[13.5px] font-semibold gap-2 shadow-sm shadow-[#1F3A5F]/20 hover:shadow-md hover:shadow-[#1F3A5F]/25 transition-shadow"
+            style={{ background: '#1F3A5F' }}
+          >
+            <Plus size={15} strokeWidth={2.5} />
+            Add New Clinic
+          </Button>
         </div>
       </div>
 
