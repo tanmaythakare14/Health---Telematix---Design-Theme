@@ -212,7 +212,7 @@ export default function SignInV4() {
     setErrors(errs)
     if (errs.email || errs.password) return
     setLoading(true)
-    setTimeout(() => { setLoading(false); navigate('/clinic-management') }, 1200)
+    setTimeout(() => { setLoading(false); navigate('/dashboard') }, 1200)
   }
 
   return (

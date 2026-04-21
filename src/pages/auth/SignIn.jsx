@@ -85,7 +85,7 @@ export default function SignIn() {
     // Simulated async sign-in
     setTimeout(() => {
       setLoading(false)
-      navigate('/clinic-management')
+      navigate('/dashboard')
     }, 1200)
   }
 
