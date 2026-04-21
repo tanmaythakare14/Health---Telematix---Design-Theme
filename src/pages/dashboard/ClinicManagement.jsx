@@ -151,7 +151,7 @@ export default function ClinicManagement() {
   }
 
   return (
-    <DashboardLayout pageTitle="Clinic Management">
+    <DashboardLayout pageTitle="Clinic Management" pageSubtitle="Manage and monitor your clinic network and care teams">
 
       {/* ── Section 1: Page Header ── */}
       <div className="flex items-start justify-between mb-7">

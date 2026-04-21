@@ -298,11 +298,11 @@ export default function MessagesV1() {
   const totalUnread = SESSIONS.reduce((n, s) => n + s.unread, 0)
 
   return (
-    <DashboardLayout pageTitle="Messages">
+    <DashboardLayout pageTitle="Messages" pageSubtitle="Team communication and patient messaging">
       {/* Negate dash-page padding and fill the remaining viewport */}
       <div style={{
         margin: '-32px',
-        height: 'calc(100vh - 64px)',
+        height: 'calc(100vh - 80px)',
         display: 'flex',
         overflow: 'hidden',
         fontFamily: FF,

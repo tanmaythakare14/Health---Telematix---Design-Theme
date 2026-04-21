@@ -252,7 +252,7 @@ function LeftNav({ active: activeItem, collapsed, onToggle }) {
     <div style={{ width: navW, minHeight: '100vh', background: '#ffffff', borderRight: '1px solid #E8EDF2', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, zIndex: 40, boxShadow: '2px 0 12px rgba(0,0,0,0.04)', transition: 'width 0.22s ease', overflow: 'hidden' }}>
 
       {/* Logo + toggle */}
-      <div style={{ padding: collapsed ? '20px 0' : '22px 18px 18px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', flexShrink: 0, position: 'relative' }}>
+      <div style={{ height: 80, padding: collapsed ? '0' : '0 18px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', flexShrink: 0, position: 'relative', borderBottom: '1px solid #F1F5F9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0, background: TEAL, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 4px 10px ${TEAL}44` }}>
             <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
@@ -274,9 +274,8 @@ function LeftNav({ active: activeItem, collapsed, onToggle }) {
         </button>
       </div>
 
-      <div style={{ height: 1, background: '#F1F5F9', margin: collapsed ? '0 10px' : '0 18px', flexShrink: 0 }} />
       <div style={{ padding: collapsed ? '14px 8px' : '14px 12px', flex: 1 }}>
-        {!collapsed && <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}>Main Menu</p>}
+        {!collapsed && <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}></p>}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {mainNav.map(item => (
             <NavItem key={item.id} icon={item.icon} label={item.label} active={activeItem === item.id} badge={item.badge} collapsed={collapsed}
@@ -288,9 +287,9 @@ function LeftNav({ active: activeItem, collapsed, onToggle }) {
           ))}
         </div>
       </div>
-      <div style={{ padding: collapsed ? '10px 8px 18px' : '10px 12px 18px', borderTop: '1px solid #F1F5F9', display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0 }}>
+      <div style={{ padding: collapsed ? '12px 8px 20px' : '12px 12px 20px', borderTop: '1px solid #F1F5F9', display: 'flex', flexDirection: 'column', gap: 6, flexShrink: 0 }}>
         <NavItem icon={<Settings size={17} />} label="Settings" active={activeItem === 'settings'} collapsed={collapsed} />
-        <div style={{ position: 'relative', marginTop: 6 }}>
+        <div style={{ position: 'relative' }}>
           <button onClick={() => setProfileOpen(o => !o)} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 10, padding: collapsed ? '9px 0' : '9px 12px', justifyContent: collapsed ? 'center' : 'flex-start', borderRadius: 9, background: profileOpen ? '#F1F5F9' : 'transparent', border: 'none', cursor: 'pointer', fontFamily: FF, transition: 'background 0.15s' }}
             onMouseEnter={e => e.currentTarget.style.background = '#F1F5F9'}
             onMouseLeave={e => { if (!profileOpen) e.currentTarget.style.background = 'transparent' }}
@@ -362,7 +361,7 @@ export default function MessagesV4() {
   const [search,       setSearch]       = useState('')
   const [selected,     setSelected]     = useState(SESSIONS[0])
 
-  const TOPBAR_H = 64
+  const TOPBAR_H = 80
   const panelH   = `calc(100vh - ${TOPBAR_H}px)`
 
   const filtered = SESSIONS.filter(s =>
@@ -379,15 +378,32 @@ export default function MessagesV4() {
       <div style={{ marginLeft: navCollapsed ? COLLAPSED_W : NAV_W, flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, transition: 'margin-left 0.22s ease' }}>
 
         {/* ── Top bar ── */}
-        <div style={{ height: TOPBAR_H, background: '#ffffff', borderBottom: '1px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', flexShrink: 0 }}>
-          <div>
-            <h1 style={{ fontSize: 16, fontWeight: 700, color: '#0F172A', margin: 0, fontFamily: FF, letterSpacing: '-0.01em' }}>Messages</h1>
-            <p style={{ fontSize: 12, color: '#94A3B8', margin: 0, fontFamily: FF }}>Read-only conversation history</p>
+        <div style={{ height: TOPBAR_H, background: '#ffffff', borderBottom: '1px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 28px', flexShrink: 0 }}>
+          {/* Title + subtitle */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <h1 style={{ fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0, fontFamily: FF, letterSpacing: '-0.01em', lineHeight: 1.2 }}>Messages</h1>
+            <p style={{ fontSize: 12.5, color: '#94A3B8', margin: 0, fontFamily: FF, lineHeight: 1.3 }}>Team communication and patient messaging</p>
           </div>
-          <button style={{ position: 'relative', width: 38, height: 38, borderRadius: 9, border: '1px solid #E2E8F0', background: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748B' }}>
-            <Bell size={17} />
-            <span style={{ position: 'absolute', top: 8, right: 9, width: 7, height: 7, borderRadius: '50%', background: '#EF4444', border: '1.5px solid white' }} />
-          </button>
+          {/* Actions */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {/* Bell */}
+            <button style={{ position: 'relative', width: 38, height: 38, borderRadius: 9, border: '1px solid #E2E8F0', background: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748B' }}>
+              <Bell size={17} />
+              <span style={{ position: 'absolute', top: 8, right: 9, width: 7, height: 7, borderRadius: '50%', background: '#EF4444', border: '1.5px solid white' }} />
+            </button>
+            {/* Profile */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '5px 8px', borderRadius: 8, cursor: 'pointer', transition: 'background 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#F8FAFC'}
+              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+            >
+              <div style={{ width: 32, height: 32, borderRadius: '50%', background: `linear-gradient(135deg, #14B8A6, ${TEAL})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'white', flexShrink: 0 }}>SM</div>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', margin: 0, fontFamily: FF, lineHeight: 1.2 }}>Dr. Sarah Mitchell</p>
+                <p style={{ fontSize: 10.5, color: '#94A3B8', margin: 0, fontFamily: FF, lineHeight: 1.3 }}>admin@healthtelematix.com</p>
+              </div>
+              <ChevronDown size={13} style={{ color: '#CBD5E1', flexShrink: 0 }} />
+            </div>
+          </div>
         </div>
 
         {/* ── 3-panel body ── */}

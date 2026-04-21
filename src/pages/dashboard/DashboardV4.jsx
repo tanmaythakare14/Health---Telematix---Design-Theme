@@ -10,6 +10,7 @@ import {
   Tooltip, Legend, PieChart, Pie, Cell,
 } from 'recharts'
 import { ALL_CLINICS } from '../../data/clinics'
+import { Card, CardContent } from '@/components/ui/card'
 
 /* ─── Design tokens ─────────────────────────────────────────── */
 const TEAL     = '#0D9488'
@@ -214,7 +215,7 @@ function LeftNav({ collapsed, onToggle }) {
     }}>
 
       {/* Logo + toggle */}
-      <div style={{ padding: collapsed ? '20px 0' : '22px 18px 18px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', flexShrink: 0, position: 'relative' }}>
+      <div style={{ height: 80, padding: collapsed ? '0' : '0 18px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'space-between', flexShrink: 0, position: 'relative', borderBottom: '1px solid #F1F5F9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 10 }}>
           <div style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0, background: TEAL, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 4px 10px ${TEAL}44` }}>
             <svg width="18" height="18" viewBox="0 0 26 26" fill="none">
@@ -239,11 +240,9 @@ function LeftNav({ collapsed, onToggle }) {
         </button>
       </div>
 
-      <div style={{ height: 1, background: '#F1F5F9', margin: collapsed ? '0 10px' : '0 18px', flexShrink: 0 }} />
-
       {/* Nav items */}
       <div style={{ padding: collapsed ? '14px 8px' : '14px 12px', flex: 1 }}>
-        {!collapsed && <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}>Main Menu</p>}
+        {!collapsed && <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}></p>}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {mainNav.map(item => (
             <div key={item.id}
@@ -264,9 +263,9 @@ function LeftNav({ collapsed, onToggle }) {
       </div>
 
       {/* Bottom */}
-      <div style={{ padding: collapsed ? '10px 8px 18px' : '10px 12px 18px', borderTop: '1px solid #F1F5F9', display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <div style={{ padding: collapsed ? '12px 8px 20px' : '12px 12px 20px', borderTop: '1px solid #F1F5F9', display: 'flex', flexDirection: 'column', gap: 6 }}>
         <NavItem icon={<Settings size={17} />} label="Settings" active={false} collapsed={collapsed} />
-        <div style={{ position: 'relative', marginTop: 6 }}>
+        <div style={{ position: 'relative' }}>
           <button onClick={() => setProfileOpen(o => !o)}
             style={{ width: '100%', display: 'flex', alignItems: 'center', gap: collapsed ? 0 : 10, padding: collapsed ? '9px 0' : '9px 12px', justifyContent: collapsed ? 'center' : 'flex-start', borderRadius: 9, background: profileOpen ? '#F1F5F9' : 'transparent', border: 'none', cursor: 'pointer', fontFamily: FF, transition: 'background 0.15s' }}
             onMouseEnter={e => e.currentTarget.style.background = '#F1F5F9'}
@@ -310,23 +309,25 @@ function LeftNav({ collapsed, onToggle }) {
 /* ─── Top Bar ────────────────────────────────────────────────── */
 function TopBar() {
   return (
-    <div style={{ height: 80, background: '#ffffff', borderBottom: '1px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 28px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)', position: 'sticky', top: 0, zIndex: 30 }}>
-      <div>
-        <h1 style={{ fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0, fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '-0.01em' }}>Dashboard</h1>
-        <p style={{ fontSize: 12.5, color: '#94A3B8', margin: 0, fontFamily: 'Inter, system-ui, sans-serif' }}>Overview of clinic performance, enrollment metrics and billing</p>
+    <div style={{ height: 80, background: '#ffffff', borderBottom: '1px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 28px', position: 'sticky', top: 0, zIndex: 30 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <h1 style={{ fontSize: 17, fontWeight: 700, color: '#0F172A', margin: 0, fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '-0.01em', lineHeight: 1.2 }}>Dashboard</h1>
+        <p style={{ fontSize: 12.5, color: '#94A3B8', margin: 0, fontFamily: 'Inter, system-ui, sans-serif', lineHeight: 1.3 }}>Overview of clinic performance, enrollment metrics and billing</p>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <button style={{ position: 'relative', width: 38, height: 38, borderRadius: 9, border: '1px solid #E2E8F0', background: '#ffffff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748B' }}>
           <Bell size={17} />
           <span style={{ position: 'absolute', top: 8, right: 9, width: 7, height: 7, borderRadius: '50%', background: '#EF4444', border: '1.5px solid white' }} />
         </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '6px 12px 6px 6px', borderRadius: 10, border: '1px solid #E8EDF2', background: '#ffffff', cursor: 'pointer' }}>
-          <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, #14B8A6, ${TEAL})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10.5, fontWeight: 700, color: 'white' }}>SM</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '5px 8px', borderRadius: 8, cursor: 'pointer', transition: 'background 0.15s' }}
+          onMouseEnter={e => e.currentTarget.style.background = '#F8FAFC'}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+          <div style={{ width: 32, height: 32, borderRadius: '50%', background: `linear-gradient(135deg, #14B8A6, ${TEAL})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: 'white', flexShrink: 0 }}>SM</div>
           <div>
-            <p style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', margin: 0, fontFamily: 'Inter, system-ui, sans-serif' }}>Dr. Sarah Mitchell</p>
-            <p style={{ fontSize: 10.5, color: '#94A3B8', margin: 0, fontFamily: 'Inter, system-ui, sans-serif' }}>admin@healthtelematix.com</p>
+            <p style={{ fontSize: 12, fontWeight: 600, color: '#0F172A', margin: 0, fontFamily: FF, lineHeight: 1.2 }}>Dr. Sarah Mitchell</p>
+            <p style={{ fontSize: 10.5, color: '#94A3B8', margin: 0, fontFamily: FF, lineHeight: 1.3 }}>admin@healthtelematix.com</p>
           </div>
-          <ChevronDown size={12} style={{ color: '#94A3B8' }} />
+          <ChevronDown size={13} style={{ color: '#CBD5E1', flexShrink: 0 }} />
         </div>
       </div>
     </div>
@@ -640,28 +641,46 @@ export default function DashboardV4() {
             {/* CPT Code Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
               {CPT_CARDS.map((card, i) => (
-                <div key={i} style={{
-                  background: '#ffffff', borderRadius: 12, border: '1px solid #E2E8F0',
-                  borderLeft: `4px solid ${TEAL}`,
-                  padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 10,
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                }}>
-                  <div>
-                    <span style={{ fontSize: 15, fontWeight: 800, color: TEAL, letterSpacing: '-0.01em', fontFamily: 'Inter, system-ui, sans-serif' }}>{card.code}</span>
-                    <p style={{ fontSize: 11.5, color: '#94A3B8', margin: '4px 0 0', lineHeight: 1.45, fontFamily: 'Inter, system-ui, sans-serif' }}>{card.desc}</p>
-                  </div>
-                  <div style={{ height: 1, background: '#F1F5F9' }} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <Card
+                  key={i}
+                  className="border-0 border-l-[4px] shadow-sm overflow-hidden"
+                  style={{ borderLeftColor: TEAL }}
+                >
+                  <CardContent className="p-[16px_18px] flex flex-col gap-[10px]">
+                    {/* Code + description */}
                     <div>
-                      <p style={{ fontSize: 10, color: '#94A3B8', margin: '0 0 2px', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600 }}>Patients Billed</p>
-                      <p style={{ fontSize: 20, fontWeight: 800, color: '#0F172A', margin: 0, fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '-0.02em' }}>{card.patients.toLocaleString()}</p>
+                      <span className="text-[15px] font-extrabold tracking-[-0.01em]" style={{ color: TEAL }}>
+                        {card.code}
+                      </span>
+                      <p className="text-[11.5px] text-slate-400 mt-1 leading-snug">
+                        {card.desc}
+                      </p>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <p style={{ fontSize: 10, color: '#94A3B8', margin: '0 0 2px', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600 }}>Revenue</p>
-                      <p style={{ fontSize: 18, fontWeight: 800, color: TEAL, margin: 0, fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '-0.02em' }}>{fmt$(card.revenue)}</p>
+
+                    {/* Separator */}
+                    <div className="h-px bg-slate-100" />
+
+                    {/* Patients Billed + Revenue */}
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-slate-400 mb-0.5">
+                          Patients Billed
+                        </p>
+                        <p className="text-[20px] font-extrabold tracking-[-0.02em] text-slate-900 leading-none">
+                          {card.patients.toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-slate-400 mb-0.5">
+                          Revenue
+                        </p>
+                        <p className="text-[18px] font-extrabold tracking-[-0.02em] leading-none" style={{ color: TEAL }}>
+                          {fmt$(card.revenue)}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
 

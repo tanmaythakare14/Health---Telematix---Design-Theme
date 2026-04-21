@@ -1,9 +1,16 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '../../styles/dashboard.css'
 import Sidebar from './Sidebar'
 import TopBar from './TopBar'
 
-export default function DashboardLayout({ children, pageTitle }) {
+const NAV_W       = 240
+const COLLAPSED_W = 60
+const PAGE_BG     = '#F4F7FB'
+
+export default function DashboardLayout({ children, pageTitle, pageSubtitle }) {
+  const [navCollapsed, setNavCollapsed] = useState(false)
+  const navW = navCollapsed ? COLLAPSED_W : NAV_W
+
   useEffect(() => {
     const root = document.getElementById('root')
     if (root) root.classList.add('auth-root')
@@ -11,12 +18,23 @@ export default function DashboardLayout({ children, pageTitle }) {
   }, [])
 
   return (
-    <div className="dash-shell">
-      <Sidebar />
-      <TopBar pageTitle={pageTitle} />
-      <main className="dash-main">
-        <div className="dash-page">{children}</div>
-      </main>
+    <div style={{ display: 'flex', minHeight: '100vh', background: PAGE_BG, fontFamily: 'Inter, system-ui, sans-serif' }}>
+      <Sidebar collapsed={navCollapsed} onToggle={() => setNavCollapsed(o => !o)} />
+
+      {/* Right column: TopBar (sticky) + page content */}
+      <div style={{
+        marginLeft: navW,
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        minWidth: 0,
+        transition: 'margin-left 0.22s ease',
+      }}>
+        <TopBar pageTitle={pageTitle} pageSubtitle={pageSubtitle} />
+        <main className="dash-main">
+          <div className="dash-page">{children}</div>
+        </main>
+      </div>
     </div>
   )
 }

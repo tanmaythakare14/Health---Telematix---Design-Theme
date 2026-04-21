@@ -7,27 +7,40 @@ function BellIcon() {
   )
 }
 
-export default function TopBar({ pageTitle = 'Dashboard' }) {
+function ChevronDownIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  )
+}
+
+export default function TopBar({ pageTitle = 'Dashboard', pageSubtitle = '' }) {
   return (
     <header className="dash-topbar">
-      <span className="dash-topbar__page-title">{pageTitle}</span>
+      {/* Title + Subtitle */}
+      <div className="dash-topbar__title-block">
+        <span className="dash-topbar__page-title">{pageTitle}</span>
+        {pageSubtitle && (
+          <span className="dash-topbar__page-subtitle">{pageSubtitle}</span>
+        )}
+      </div>
 
-      <div className="dash-topbar__actions">
+      <div className="dash-topbar__actions" style={{ gap: 10 }}>
         {/* Notification Bell */}
         <button className="dash-notif-btn" aria-label="Notifications">
           <BellIcon />
           <span className="dash-notif-badge" aria-hidden="true" />
         </button>
 
-        <div className="dash-topbar__divider" />
-
-        {/* Profile */}
+        {/* Profile — no surrounding box, no divider */}
         <button className="dash-profile" aria-label="Account menu">
           <div className="dash-profile__avatar">SM</div>
           <div className="dash-profile__info">
             <span className="dash-profile__name">Dr. Sarah Mitchell</span>
             <span className="dash-profile__email">admin@healthtelematix.com</span>
           </div>
+          <ChevronDownIcon />
         </button>
       </div>
     </header>

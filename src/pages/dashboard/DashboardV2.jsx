@@ -9,6 +9,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, PieChart, Pie, Cell,
 } from 'recharts'
+import { Card, CardContent } from '@/components/ui/card'
 
 /* ─── Design tokens ─────────────────────────────────────────── */
 const BLUE    = '#2563EB'
@@ -392,23 +393,46 @@ export default function DashboardV2() {
           {/* CPT Code Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
             {CPT_CARDS.map((card, i) => (
-              <div key={i} style={{ background: '#ffffff', borderRadius: 12, border: '1px solid #E2E8F0', borderLeft: `4px solid ${BLUE}`, padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 10, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
-                <div>
-                  <span style={{ fontSize: 15, fontWeight: 800, color: BLUE, letterSpacing: '-0.01em', fontFamily: FF }}>{card.code}</span>
-                  <p style={{ fontSize: 11.5, color: '#94A3B8', margin: '4px 0 0', lineHeight: 1.45, fontFamily: FF }}>{card.desc}</p>
-                </div>
-                <div style={{ height: 1, background: '#F1F5F9' }} />
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <Card
+                key={i}
+                className="border-0 border-l-[4px] shadow-sm overflow-hidden"
+                style={{ borderLeftColor: BLUE }}
+              >
+                <CardContent className="p-[16px_18px] flex flex-col gap-[10px]">
+                  {/* Code + description */}
                   <div>
-                    <p style={{ fontSize: 10, color: '#94A3B8', margin: '0 0 2px', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: FF, fontWeight: 600 }}>Patients Billed</p>
-                    <p style={{ fontSize: 20, fontWeight: 800, color: '#0F172A', margin: 0, fontFamily: FF, letterSpacing: '-0.02em' }}>{card.patients.toLocaleString()}</p>
+                    <span className="text-[15px] font-extrabold tracking-[-0.01em]" style={{ color: BLUE }}>
+                      {card.code}
+                    </span>
+                    <p className="text-[11.5px] text-slate-400 mt-1 leading-snug">
+                      {card.desc}
+                    </p>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontSize: 10, color: '#94A3B8', margin: '0 0 2px', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: FF, fontWeight: 600 }}>Revenue</p>
-                    <p style={{ fontSize: 18, fontWeight: 800, color: BLUE, margin: 0, fontFamily: FF, letterSpacing: '-0.02em' }}>{fmt$(card.revenue)}</p>
+
+                  {/* Separator */}
+                  <div className="h-px bg-slate-100" />
+
+                  {/* Patients Billed + Revenue */}
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-slate-400 mb-0.5">
+                        Patients Billed
+                      </p>
+                      <p className="text-[20px] font-extrabold tracking-[-0.02em] text-slate-900 leading-none">
+                        {card.patients.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.06em] text-slate-400 mb-0.5">
+                        Revenue
+                      </p>
+                      <p className="text-[18px] font-extrabold tracking-[-0.02em] leading-none" style={{ color: BLUE }}>
+                        {fmt$(card.revenue)}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
 
