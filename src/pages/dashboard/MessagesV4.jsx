@@ -205,7 +205,7 @@ function NavItem({ icon, label, active, onClick, badge, collapsed, showTooltip }
       <button onClick={onClick} style={{
         width: '100%', display: 'flex', alignItems: 'center',
         gap: collapsed ? 0 : 11,
-        padding: collapsed ? '10px 0' : '9px 12px',
+        padding: collapsed ? '12px 0' : '12px 16px',
         justifyContent: collapsed ? 'center' : 'flex-start',
         borderRadius: 9,
         background: active ? TEAL : 'transparent',
@@ -249,6 +249,7 @@ function LeftNav({ active: activeItem, collapsed, onToggle }) {
   const navW = collapsed ? COLLAPSED_W : NAV_W
 
   return (
+    <>
     <div style={{ width: navW, minHeight: '100vh', background: '#ffffff', borderRight: '1px solid #E8EDF2', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, zIndex: 40, boxShadow: '2px 0 12px rgba(0,0,0,0.04)', transition: 'width 0.22s ease', overflow: 'hidden' }}>
 
       {/* Logo + toggle */}
@@ -266,17 +267,11 @@ function LeftNav({ active: activeItem, collapsed, onToggle }) {
             </div>
           )}
         </div>
-        <button onClick={onToggle} style={{ position: 'fixed', left: navW - 12, top: 40, width: 24, height: 24, borderRadius: '50%', background: '#ffffff', border: '1.5px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.10)', zIndex: 50, color: '#94A3B8', transition: 'left 0.22s ease' }}
-          onMouseEnter={e => { e.currentTarget.style.background = TEAL; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = TEAL }}
-          onMouseLeave={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.borderColor = '#E8EDF2' }}
-        >
-          {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
-        </button>
       </div>
 
       <div style={{ padding: collapsed ? '14px 8px' : '14px 12px', flex: 1 }}>
         {!collapsed && <p style={{ fontSize: 10, fontWeight: 700, color: '#CBD5E1', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px 12px', fontFamily: FF }}></p>}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {mainNav.map(item => (
             <NavItem key={item.id} icon={item.icon} label={item.label} active={activeItem === item.id} badge={item.badge} collapsed={collapsed}
               onClick={() => {
@@ -325,6 +320,15 @@ function LeftNav({ active: activeItem, collapsed, onToggle }) {
         </div>
       </div>
     </div>
+    <button
+      onClick={onToggle}
+      style={{ position: 'fixed', left: navW - 12, bottom: 40, width: 24, height: 24, borderRadius: '50%', background: '#ffffff', border: '1.5px solid #E8EDF2', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.10)', zIndex: 50, color: '#94A3B8', transition: 'left 0.22s ease' }}
+      onMouseEnter={e => { e.currentTarget.style.background = TEAL; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = TEAL }}
+      onMouseLeave={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.borderColor = '#E8EDF2' }}
+    >
+      {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
+    </button>
+    </>
   )
 }
 
