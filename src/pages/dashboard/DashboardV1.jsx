@@ -545,9 +545,9 @@ export default function DashboardV1() {
   const grandTotal = apcmTotal + rpmTotal + otherTotal
 
   const pieData = [
-    { name: 'APCM Revenue', value: apcmTotal,  color: NAVY      },
-    { name: 'RPM Revenue',  value: rpmTotal,   color: '#64748B' },
-    { name: 'Other',        value: otherTotal, color: '#CBD5E1' },
+    { name: 'APCM Revenue', value: apcmTotal,  color: '#93C5FD' },
+    { name: 'RPM Revenue',  value: rpmTotal,   color: '#6EE7B7' },
+    { name: 'Other',        value: otherTotal, color: '#FDE68A' },
   ]
 
   const fmt$ = n => `$${n.toLocaleString()}`
@@ -620,8 +620,8 @@ export default function DashboardV1() {
                       formatter={(value) => <span style={{ fontSize: 12, color: '#64748B', fontFamily: 'Inter, system-ui' }}>{value}</span>}
                       wrapperStyle={{ paddingTop: 12 }}
                     />
-                    <Line type="monotone" dataKey="apcm" name="APCM Revenue" stroke={NAVY} strokeWidth={2.5} dot={{ r: 3.5, fill: NAVY, stroke: 'white', strokeWidth: 2 }} activeDot={{ r: 5 }} />
-                    <Line type="monotone" dataKey="rpm"  name="RPM Revenue"  stroke="#64748B" strokeWidth={2} strokeDasharray="6 3" dot={{ r: 3, fill: '#64748B', stroke: 'white', strokeWidth: 2 }} activeDot={{ r: 4.5 }} />
+                    <Line type="monotone" dataKey="apcm" name="APCM Revenue" stroke="#3B82F6" strokeWidth={2.5} dot={{ r: 3.5, fill: '#3B82F6', stroke: 'white', strokeWidth: 2 }} activeDot={{ r: 5 }} />
+                    <Line type="monotone" dataKey="rpm"  name="RPM Revenue"  stroke="#10B981" strokeWidth={2} strokeDasharray="6 3" dot={{ r: 3, fill: '#10B981', stroke: 'white', strokeWidth: 2 }} activeDot={{ r: 4.5 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
