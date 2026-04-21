@@ -306,7 +306,7 @@ export default function MessagesV2() {
   const panelH = `calc(100vh - ${TOPBAR_H}px)`
 
   return (
-    <div style={{ minHeight: '100vh', background: PAGE_BG, fontFamily: FF, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100vh', overflow: 'hidden', background: PAGE_BG, fontFamily: FF, display: 'flex', flexDirection: 'column' }}>
       <TopNav />
 
       {/* ── 3-panel body ── */}
@@ -467,10 +467,10 @@ export default function MessagesV2() {
         </div>
 
         {/* ════ RIGHT PANEL 25% ════ */}
-        <div style={{ width: '22%', flexShrink: 0, borderLeft: `1px solid ${BORDER}`, background: SURFACE, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ width: '22%', flexShrink: 0, borderLeft: `1px solid ${BORDER}`, background: SURFACE, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
 
-          {/* Patient header */}
-          <div style={{ padding: '20px 18px 16px', borderBottom: `1px solid ${BORDER}`, textAlign: 'center' }}>
+          {/* Patient header — sticky */}
+          <div style={{ padding: '20px 18px 16px', borderBottom: `1px solid ${BORDER}`, textAlign: 'center', flexShrink: 0 }}>
             <Avatar initials={p?.initials} bg={p?.color + '18'} color={p?.color} size={52} />
             <p style={{ fontSize: 14.5, fontWeight: 700, color: TEXT, margin: '10px 0 3px', fontFamily: FF }}>{p?.name}</p>
             <p style={{ fontSize: 12, color: MUTED, margin: 0, fontFamily: FF }}>{p?.gender} · Age {p?.age} · DOB {p?.dob}</p>
@@ -482,7 +482,7 @@ export default function MessagesV2() {
             </div>
           </div>
 
-          <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 22 }}>
 
             {/* Latest Vitals */}
             <div>
