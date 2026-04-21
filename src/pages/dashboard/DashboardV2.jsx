@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, Building2, Boxes, CreditCard, MessageSquare,
-  Bell, LogOut, TrendingUp, TrendingDown,
+  Bell, LogOut, ChevronDown, TrendingUp, TrendingDown,
   Users, UserPlus, UserMinus, Activity, DollarSign, Percent,
 } from 'lucide-react'
 import {
