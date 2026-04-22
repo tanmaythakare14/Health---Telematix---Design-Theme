@@ -207,6 +207,7 @@ function LeftNav({ collapsed, onToggle }) {
   const navW = collapsed ? COLLAPSED_W : NAV_W
 
   return (
+    <>
     <div style={{
       width: navW, minHeight: '100vh',
       background: SIDEBAR_BG,
@@ -235,15 +236,6 @@ function LeftNav({ collapsed, onToggle }) {
             </span>
           )}
         </div>
-        {/* Collapse toggle */}
-        <button
-          onClick={onToggle}
-          style={{ position: 'fixed', left: navW - 12, top: 40, width: 24, height: 24, borderRadius: '50%', background: SIDEBAR_BG, border: '1.5px solid rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.30)', zIndex: 110, color: 'rgba(255,255,255,0.45)', transition: 'left 0.22s ease' }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#4F8EF7'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#4F8EF7' }}
-          onMouseLeave={e => { e.currentTarget.style.background = SIDEBAR_BG; e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)' }}
-        >
-          {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
-        </button>
       </div>
 
       {/* Nav items */}
@@ -269,14 +261,14 @@ function LeftNav({ collapsed, onToggle }) {
                 style={{
                   width: '100%', display: 'flex', alignItems: 'center',
                   gap: collapsed ? 0 : 12,
-                  padding: collapsed ? '10px 0' : '10px 12px',
+                  padding: collapsed ? '13px 0' : '13px 16px',
                   justifyContent: collapsed ? 'center' : 'flex-start',
                   borderRadius: 8, border: 'none', cursor: 'pointer',
                   background: active ? 'rgba(79,142,247,0.15)' : 'transparent',
                   color: active ? '#ffffff' : 'rgba(255,255,255,0.52)',
                   fontSize: 13.5, fontWeight: active ? 600 : 500,
                   fontFamily: FF, transition: 'background 0.15s, color 0.15s',
-                  textAlign: 'left', marginBottom: 2,
+                  textAlign: 'left', marginBottom: 6,
                 }}
                 onMouseEnter={e => { if (!active) { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.85)' } }}
                 onMouseLeave={e => { if (!active) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.52)' } }}
@@ -353,6 +345,15 @@ function LeftNav({ collapsed, onToggle }) {
         </div>
       </nav>
     </div>
+    <button
+      onClick={onToggle}
+      style={{ position: 'fixed', left: navW - 12, bottom: 40, width: 24, height: 24, borderRadius: '50%', background: SIDEBAR_BG, border: '1.5px solid rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 6px rgba(0,0,0,0.30)', zIndex: 110, color: 'rgba(255,255,255,0.45)', transition: 'left 0.22s ease' }}
+      onMouseEnter={e => { e.currentTarget.style.background = '#4F8EF7'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#4F8EF7' }}
+      onMouseLeave={e => { e.currentTarget.style.background = SIDEBAR_BG; e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)' }}
+    >
+      {collapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
+    </button>
+    </>
   )
 }
 
