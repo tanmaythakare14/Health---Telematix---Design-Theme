@@ -34,14 +34,14 @@ export default function TopBar({ pageTitle = 'Dashboard', pageSubtitle = '' }) {
         </button>
 
         {/* Profile — no surrounding box, no divider */}
-        <button className="dash-profile" aria-label="Account menu">
+        {/* <button className="dash-profile" aria-label="Account menu">
           <div className="dash-profile__avatar">SM</div>
           <div className="dash-profile__info">
             <span className="dash-profile__name">Dr. Sarah Mitchell</span>
             <span className="dash-profile__email">admin@healthtelematix.com</span>
           </div>
           <ChevronDownIcon />
-        </button>
+        </button> */}
       </div>
     </header>
   )
