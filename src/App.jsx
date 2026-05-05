@@ -6,18 +6,23 @@ import DemoSwitcher from './components/demo/DemoSwitcher'
 import SignIn         from './pages/auth/SignIn'
 import SignInV2       from './pages/auth/SignInV2'
 import SignInV4       from './pages/auth/SignInV4'
+import SignInV5       from './pages/auth/SignInV5'
 import ForgotPassword from './pages/auth/ForgotPassword'
 
 /* Dashboard pages */
 import ClinicManagement   from './pages/dashboard/ClinicManagement'
 import ClinicManagementV2 from './pages/dashboard/ClinicManagementV2'
 import ClinicManagementV4 from './pages/dashboard/ClinicManagementV4'
+import ClinicManagementV5 from './pages/dashboard/ClinicManagementV5'
 import ClinicDetail       from './pages/dashboard/ClinicDetail'
 import ClinicDetailV2     from './pages/dashboard/ClinicDetailV2'
 import ClinicDetailV4     from './pages/dashboard/ClinicDetailV4'
+import ClinicDetailV5     from './pages/dashboard/ClinicDetailV5'
 import MessagesV1        from './pages/dashboard/MessagesV1'
 import MessagesV2        from './pages/dashboard/MessagesV2'
 import MessagesV4        from './pages/dashboard/MessagesV4'
+import MessagesV5        from './pages/dashboard/MessagesV5'
+import DashboardV5       from './pages/dashboard/DashboardV5'
 import DashboardV4       from './pages/dashboard/DashboardV4'
 import DashboardV2       from './pages/dashboard/DashboardV2'
 import DashboardV1       from './pages/dashboard/DashboardV1'
@@ -28,6 +33,7 @@ function SignInRoute() {
   const { variant } = useVariant()
   if (variant === 2) return <SignInV2 />
   if (variant === 4) return <SignInV4 />
+  if (variant === 5) return <SignInV5 />
   return <SignIn />
 }
 
@@ -35,11 +41,13 @@ function ClinicManagementRoute() {
   const { variant } = useVariant()
   if (variant === 2) return <ClinicManagementV2 />
   if (variant === 4) return <ClinicManagementV4 />
+  if (variant === 5) return <ClinicManagementV5 />
   return <ClinicManagement />
 }
 
 function MessagesRoute() {
   const { variant } = useVariant()
+  if (variant === 5) return <MessagesV5 />
   if (variant === 4) return <MessagesV4 />
   if (variant === 2) return <MessagesV2 />
   return <MessagesV1 />
@@ -47,6 +55,7 @@ function MessagesRoute() {
 
 function DashboardRoute() {
   const { variant } = useVariant()
+  if (variant === 5) return <DashboardV5 />
   if (variant === 4) return <DashboardV4 />
   if (variant === 2) return <DashboardV2 />
   if (variant === 1) return <DashboardV1 />
@@ -57,6 +66,7 @@ function ClinicDetailRoute() {
   const { variant } = useVariant()
   if (variant === 2) return <ClinicDetailV2 />
   if (variant === 4) return <ClinicDetailV4 />
+  if (variant === 5) return <ClinicDetailV5 />
   return <ClinicDetail />
 }
 

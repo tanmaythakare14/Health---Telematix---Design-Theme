@@ -5,6 +5,7 @@ const THEMES = [
   { id: 1, label: 'Variation 1', color: '#1F3A5F' },
   { id: 2, label: 'Variation 2', color: '#2563EB' },
   { id: 4, label: 'Variation 3', color: '#0D9488' },
+  { id: 5, label: 'Variation 4', color: '#0D9488', gradient: 'linear-gradient(135deg, #1F3A5F 0%, #0D9488 100%)' },
 ]
 
 /* All styles are inline so the switcher looks identical
@@ -72,7 +73,7 @@ export default function DemoSwitcher() {
               transition: 'all 0.18s ease',
               whiteSpace: 'nowrap',
               ...(isActive
-                ? { background: t.color, color: '#fff', boxShadow: `0 2px 8px ${t.color}55` }
+                ? { background: t.gradient ?? t.color, color: '#fff', boxShadow: `0 2px 8px ${t.color}55` }
                 : { background: 'transparent', color: '#64748b' }),
             }}
           >

@@ -7,7 +7,7 @@ const VariantContext = createContext({ variant: 1, setVariant: () => {} })
 export function VariantProvider({ children }) {
   const [variant, setVariantState] = useState(() => {
     const n = parseInt(localStorage.getItem(STORAGE_KEY), 10)
-    return [1, 2, 4].includes(n) ? n : 1
+    return [1, 2, 4, 5].includes(n) ? n : 1
   })
 
   function setVariant(v) {
