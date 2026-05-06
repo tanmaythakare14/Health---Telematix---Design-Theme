@@ -61,7 +61,7 @@ function KpiCard({ heading, subheading, value, trend, icon }) {
           <p style={{ fontSize: 14, fontWeight: 600, color: '#0F172A', margin: 0, lineHeight: 1.3, fontFamily: FF }}>{heading}</p>
           <p style={{ fontSize: 12.5, color: '#94A3B8', margin: '4px 0 0', lineHeight: 1.4, fontFamily: FF }}>{subheading}</p>
         </div>
-        <div style={{ width: 40, height: 40, borderRadius: 10, flexShrink: 0, background: 'linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(135deg, #1F3A5F 0%, #0D9488 100%) border-box', border: '1.5px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1F3A5F' }}>
+        <div style={{ width: 40, height: 40, borderRadius: 10, flexShrink: 0, background: 'linear-gradient(#F8FAFC, #F8FAFC) padding-box, linear-gradient(135deg, #1F3A5F 0%, #0D9488 100%) border-box', border: '1.5px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1F3A5F' }}>
           {icon}
         </div>
       </div>

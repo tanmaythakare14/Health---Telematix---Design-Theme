@@ -193,7 +193,7 @@ function KpiCard({ icon, label, subLabel, value, trendUp, trendText }) {
           <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', margin: '0 0 3px', fontFamily: FF, lineHeight: 1.3 }}>{label}</p>
           <p style={{ fontSize: 11.5, color: '#94A3B8', margin: 0, fontFamily: FF, lineHeight: 1.4 }}>{subLabel}</p>
         </div>
-        <div style={{ width: 36, height: 36, borderRadius: 9, background: '#ffffff', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: NAVY, flexShrink: 0 }}>
+        <div style={{ width: 36, height: 36, borderRadius: 9, background: 'linear-gradient(#F8FAFC, #F8FAFC) padding-box, linear-gradient(135deg, #1F3A5F 0%, #0D9488 100%) border-box', border: '1.5px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', color: NAVY, flexShrink: 0 }}>
           {icon}
         </div>
       </div>
